@@ -1,0 +1,32 @@
+.block {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  ion-modal {
+    --height: auto;
+  }
+
+/* Additional styles for the icons */
+.custom-ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.custom-li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  color: #333;
+}
+
+.icon {
+  margin-right: 10px; /* Adjust the spacing between the icon and text */
+  font-size: 18px; /* Adjust the icon size */
+}
+
+  

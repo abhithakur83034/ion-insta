@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>App</ion-title>
+    <ion-icon slot="end" aria-hidden="true" name="menu" style="font-size: 25px;" id="open-modal" expand="block"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-modal trigger="open-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <ion-list>
+        <ion-item (click)="navigateToSettings()">
+          <ion-icon slot="start" name="settings" class="icon"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-item>
+        <ion-item (click)="navigateToActivity()">
+          <ion-icon slot="start" name="time" class="icon"></ion-icon>
+          <ion-label>Your Activity</ion-label>
+        </ion-item>
+        <ion-item (click)="navigateToArchive()">
+          <ion-icon slot="start" name="archive" class="icon"></ion-icon>
+          <ion-label>Archive</ion-label>
+        </ion-item>
+        <ion-item (click)="navigateToSaved()">
+          <ion-icon slot="start" name="bookmark" class="icon"></ion-icon>
+          <ion-label>Saved</ion-label>
+        </ion-item>
+        <ion-item (click)="navigateToQRCode()">
+          <ion-icon slot="start" name="qr-code" class="icon"></ion-icon>
+          <ion-label>QR Code</ion-label>
+        </ion-item>
+        <ion-item (click)="navigateToSupervision()">
+          <ion-icon slot="start" name="eye" class="icon"></ion-icon>
+          <ion-label>Supervision</ion-label>
+        </ion-item>
+        <ion-item (click)="navigateToCloseFriend()">
+          <ion-icon slot="start" name="people" class="icon"></ion-icon>
+          <ion-label>Close Friends</ion-label>
+        </ion-item>
+        <ion-item (click)="navigateToFavorites()">
+          <ion-icon slot="start" name="heart" class="icon"></ion-icon>
+          <ion-label>Favorites</ion-label>
+        </ion-item>
+        <ion-item (click)="logOut()">
+          <ion-icon slot="start" name="log-out" class="icon"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-item>      </ion-list>
+    </ng-template>
+  </ion-modal>
+  
+  
+
+  <ion-grid *ngIf="filterUser">
+    <ion-row>
+      <ion-col size="12">
+        <ion-row align-items-center>
+          <ion-col size="3" style="text-align: center;">
+            <img src="http://localhost:9000/img/{{filterUser.image}}" alt="" style="border-radius: 60%; height: 100px; width: 100px;">
+          </ion-col>
+          <ion-col size="3" style="text-align: center;">
+            <p>4</p>
+            <ion-text>Posts</ion-text>
+          </ion-col>
+          <ion-col size="3" style="text-align: center;" (click)="followers()">
+            <p>4</p>
+            <ion-text   >Followers</ion-text>
+          </ion-col>
+          <ion-col size="3" style="text-align: center;"   (click)="followings()" >
+            <p>4</p>
+            <ion-text>Following</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12">
+        <p>{{filterUser.name}}</p>
+      </ion-col>
+      <ion-col size="12" style="display: flex; justify-content: space-between;">
+        <span style="margin-left: 20px;" (click)="editProfile()" >Edit Profile</span>
+        <span  (click)="shareProfile()" >Share Profile</span>
+        <ion-icon aria-hidden="true" name="person-add" style="font-size: 20px;"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>App
+      {{filterUser.name}}
+    </ion-title>
+    <ion-icon  slot="end" aria-hidden="true" name="add" style="font-size: 25px; margin-right: 10px;"></ion-icon> 
+    <ion-icon slot="end" aria-hidden="true" name="menu" style="font-size: 25px;" id="open-modal" expand="block"></ion-icon>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button id="open-modal" expand="block">Open Sheet Modal</ion-button>
+    <ion-modal
+      trigger="open-modal"
+      [initialBreakpoint]="0.25"
+      [breakpoints]="[0, 0.25, 0.5, 0.75]"
+      handleBehavior="cycle"
+    >
+      <ng-template>
+        <ion-content class="ion-padding">
+          <div class="ion-margin-top">
+            <ion-label>Click the handle above to advance to the next breakpoint.</ion-label>
+          </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+  
+
+  <ion-grid *ngIf="filterUser">
+    <ion-row>
+      <ion-col size="12">
+        <ion-row align-items-center>
+          <ion-col size="3" style="text-align: center;">
+            <img src="http://localhost:9000/img/{{filterUser.image}}" alt="" style="border-radius: 60%; height: 100px; width: 100px;">
+          </ion-col>
+          <ion-col size="3" style="text-align: center;">
+            <p>4</p>
+            <ion-text>Posts</ion-text>
+          </ion-col>
+          <ion-col size="3" style="text-align: center;" (click)="followers()">
+            <p>4</p>
+            <ion-text   >Followers</ion-text>
+          </ion-col>
+          <ion-col size="3" style="text-align: center;"   (click)="followings()" >
+            <p>4</p>
+            <ion-text>Following</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12">
+        <p>{{filterUser.name}}</p>
+      </ion-col>
+      <ion-col size="12" style="display: flex; justify-content: space-between;">
+        <span style="margin-left: 20px;" (click)="editProfile()" >Edit Profile</span>
+        <span  (click)="shareProfile()" >Share Profile</span>
+        <ion-icon aria-hidden="true" name="person-add" style="font-size: 20px;"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content> -->

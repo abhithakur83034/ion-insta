@@ -1,0 +1,24 @@
+{
+    "database": {
+      "mysql": {
+        "host": "",
+        "user": "",
+        "database": "",
+        "password": "",
+        "port": ""
+      },
+      "oracle": {
+        "host": "",
+        "user": "",
+        "database": "",
+        "password": "",
+        "port": ""
+      },
+      "mongodb": {
+        "local": "",
+        "atlas": "mongodb+srv://ion-social-media:ion-s-m@cluster0.c1fvpbr.mongodb.net/ion-social-media",
+        "cluster": ""
+      }
+    }
+  }
+  
