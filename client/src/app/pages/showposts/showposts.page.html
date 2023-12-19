@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        icon="arrow-back"
+        defaultHref="/"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Posts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid >
+    <ion-row *ngIf="singleUser">
+      <ion-col (click)="gotoProfile()" >
+        <span>
+          <img
+            src="http://localhost:9000/img/{{singleUser.image}}"
+            alt=""
+            height="50px"
+            width="50px"
+            style="border-radius: 50%"
+          />
+        </span>
+        <span
+          style="font-size: large; position: absolute; bottom: 40%; left: 18%"
+          >{{singleUser.name}}</span
+        >
+      </ion-col>
+    </ion-row>
+    <div *ngIf="filterSinglePost">
+    <ion-row  *ngFor="let singlePost of filterSinglePost  let i = index">
+      <ion-col size="12" style="margin-bottom: 20px">
+        <img
+          src="http://localhost:9000/img/{{singlePost.image}}"
+          alt=""
+          height="100%"
+          width="100%"
+        />
+        <ion-row>
+          <ion-col size="3">
+            <ion-icon
+            name="heart"
+            [color]="show[i] ? 'danger' : ''"
+            (click)="togglelike(singlePost, i)"
+          ></ion-icon>
+          </ion-col>
+          <ion-col size="3">
+            <ion-icon name="chatbubbles" style="font-size: 24px"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </div>
+  </ion-grid>
+</ion-content>

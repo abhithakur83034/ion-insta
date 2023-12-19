@@ -10,7 +10,7 @@ const otpLength = 4;
 const regUser = async (req, res) => {
   //console.log(req.body);
   // //console.log(req.file);
-  const checkmail = await userModel.findOne({ email: req.body.email });
+  const checkmail = await userModel.findOne({ email: req.body.email, name:req.body.name });
   if (!checkmail) {
     try {
       const defaultImagePath = path.join(
@@ -68,14 +68,14 @@ const registeredUser = async (req, res) => {
 // put api for update=========================================================================================
 
 const updateUserPut = async (req, res) => {
-  //console.log("put req", req.body);
+  console.log("put req", req.body);
   //console.log("file", req.file);
 
   //console.log("id", req.params);
 
   try {
-    const { name, price, quality, description } = req.body;
-    const updateFields = { name, price, quality, description };
+    const { name, username, bio, gender } = req.body;
+    const updateFields = { name, username, bio, gender };
 
     if (req.file && req.file.filename) {
       updateFields.image = req.file.filename;

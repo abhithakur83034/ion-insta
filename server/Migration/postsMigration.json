@@ -1,0 +1,23 @@
+{
+    "image": {
+      "type": "String"
+    },
+    "caption": {
+      "type": "String"
+    },
+    "userId": {
+      "type": "String"
+    },
+    "postId": {
+      "type": "String"
+    },
+    "likedBy": {
+      "type": ["String"]
+    },
+    "name": {
+      "type": "String"
+    },
+    "userImage": {
+      "type": "String"
+    }
+}

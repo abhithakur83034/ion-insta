@@ -1,11 +1,50 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Search
+      Uploads
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
- 
+ <ion-grid>
+  <ion-row>
+    <ion-col>
+      <form [formGroup]="captionForm" (ngSubmit)="captionData()" >
+        <div style="display: flex; justify-content: space-between;">
+          <span style="line-height: 50px; font-size: large; " >Create New Post</span>
+        <ion-button size="small" type="submit" >Share</ion-button>
+        </div>
+      <ion-card>
+          <div (mousedown)="filesUploads($event)" style="cursor: pointer;">
+             
+            <ion-card>
+              <swiper-container effect="flip" [autoplay]="true" [delay]="2000">
+                <swiper-slide *ngFor="let imgSrc of imageSources">
+                  <img [src]="imgSrc" height="200px" width="100%" alt="">
+                </swiper-slide>
+              </swiper-container>
+            </ion-card>
+            
+          
+            <ion-item *ngIf="imageSources">
+              <img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="File Upload Icon"/>
+            </ion-item>
+            <input type="file" multiple (change)="handleFileInput($event)" #fileInput style="display: none;">
+          </div>
+          
+        <ion-card-header>
+          <ion-card-subtitle *ngIf="filterUser">
+            <img src="http://localhost:9000/img/{{ filterUser.image }}" alt="{{ filterUser.name }} image" height="60px" width="60px" style="border-radius: 50%;">
+            <span  style="font-size: large; position: absolute; bottom: 45%; left: 25%; " >{{ filterUser.name }}</span>
+          </ion-card-subtitle>
+          
+        </ion-card-header>
+        <ion-input placeholder="Write a caption" formControlName="caption" ></ion-input>
+          
+        </ion-card>
+      </form>
+    </ion-col>
+  </ion-row>
+ </ion-grid>
 </ion-content>

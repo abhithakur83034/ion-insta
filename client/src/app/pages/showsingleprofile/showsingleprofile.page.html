@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        icon="arrow-back"
+        defaultHref="/"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title  *ngIf="filterUser">{{filterUser.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid *ngIf="filterUser">
+    <ion-row>
+      <ion-col size="12">
+        <ion-row align-items-center>
+          <ion-col size="3" style="text-align: center">
+            <img
+              src="http://localhost:9000/img/{{filterUser.image}}"
+              alt=""
+              style="border-radius: 60%; height: 100px; width: 100px"
+            />
+          </ion-col>
+          <ion-col size="3" style="text-align: center">
+            <p>4</p>
+            <ion-text>Posts</ion-text>
+          </ion-col>
+          <ion-col size="3" style="text-align: center" (click)="followers()">
+            <p>4</p>
+            <ion-text>Followers</ion-text>
+          </ion-col>
+          <ion-col size="3" style="text-align: center" (click)="followings()">
+            <p>4</p>
+            <ion-text>Following</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12">
+        <p>{{filterUser.name}}</p>
+      </ion-col>
+      <ion-col size="12" style="display: flex; justify-content: space-between">
+        <ion-button size="small" >Follow</ion-button>
+        <span (click)="message()" style="margin-top: 8px;" >Message</span>
+        <span (click)="tryEmail()" style="margin-top: 8px; margin-right: 10px;" >Email</span>
+
+      </ion-col>
+    </ion-row>
+    <!-- highlight section start********************************************************************************************** -->
+    <ion-row>
+      <ion-col> </ion-col>
+    </ion-row>
+    <!-- highlight section end********************************************************************************************** -->
+
+    <!-- iocn section start******************************************************************************************************************** -->
+    <!-- <ion-icon name="apps-sharp"></ion-icon>
+    <ion-icon src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAe1BMVEX///8AAACnp6f8/PwEBARTU1MsLCxKSkoXFxegoKApKSnl5eUKCgpubm7r6+ucnJwgICC5ubnz8/MQEBDPz88UFBTd3d2+vr6vr68+Pj5UVFSWlpYeHh5cXFxxcXHY2NhkZGR8fHwyMjLDw8N5eXmJiYlBQUGHh4c3NzebjMzUAAAFFElEQVR4nO2cZ2OjMAyG6zisDCCzWW1Jeh3//xdeW+5iQWLwkoE7PR+DYvGCbbykhweCIAiCIAiCIAiCIAiCIAiCIAiCIAiCIAgD+DqbR2E8Y9rM4jCaZ2vetYJv0iwwUFBlFWRpxzIW0dhWRck4WHSngmcTNypKJklHVWznVMaPlF0HMqaRaxnfRFPfOpIVho6vdj/yKoMXODK+KTy2lPQTTwdje29d8dR5K68y8dRQpvmN69PTG6hsK9kj/VWz4cvt67G4LS73oiStv4/Tef318zIWvxSSv0psXj7qWiYeahevtY9w9KdxJuDHteTPmcSG7y7VUvf4Lb7aX23A1xgo3Ev+zC9Sm1FcKXiOp6Akqbg7wCrwCi7IPtENNumhUjTy92QKv4PjY/Xik7iULyUFHBpsjnAAusJt8HBcMquPV6dgPP8hKaDRZgEnBIH7uxfsoI7Xm8tncFX2QBttXqESxHE9Bz3v+I6f5Ulcf5KU0WyzALVrgtdzwd7zeM9gBAxuX5iKzRFcTVzeewXwQg73LfbC4lNWSrNNAF6Jq/uusxA+Ysmnd63wQJtt0o24itVKovabhN/LWNYFN9uA+ovUcaWiIV7kRqDf+WVkw8PrxTHOkAs8qoa59ZuwGm+NbEBvgNPcQTP0BUrd4tbrcPqsMD4l63a/7pHNB2zI2t26B6ORzLsQ8owgBGVBro0IQUjY7tY9IYKQuN2te2IEIR30vl9TFgQhXehgY1QhCIX79EVC+uaLhPTNFwnpmy8S0jdfJKRvvkhI33yRkL750i5ctvSL4QuvcH7esNOb6fpaj4SUK+4Tw42B/gjZ/rWNXtB9oRYudk3HzwZtpT9C4EbhJtNuKv0UwtjlEdOXLhZCGDvI9nwc+NLFSgibnXWaSo+FMHbSOCbTayGMfSpv2/RcCGOF4pGf3gthsw+lptJ/IYzlKsfGhyCEsff2pjIMIYzN2040DEUIWx2bRy2DEdJ2pmFAQpqOswxLSOHMly6OhTSeUB6SkMZJ8ICEyA6hGvjSxaWQtknjQIS0T+OHIURhYWUIQpSWuvovpG1sYuJLFxdCCsXzrz0XojB+N/Gli60QpRmViS9d7IQoznFNfOliJeRJL9DIkxCFjqcq5FMWSyKBX/+JcfBMHAVUqCRQSKwdcL8UNdLoVpsRhzMV1nHBtoLWWmnJVjwEgxttQxyXVago11sJ9FavSx6vruTxHeaIA8x3w6tqlFtvoe5+QokItMI4wCyOlBcK1vwjZrnaeOQWEfKDcaRcHPLP1f5gHjIhgqkxDvmDsAujDU51XoQnjLALLsJ0zwjFA85XRyuU8kVoUo4abc5F7Kgk2tEStWAxe9CDxZTC9+yB4XsWx1maCLAf1Q/4AZUqIa72+AhxVQg6tge8doxwnhKY8EFlnGIADAPHS/vQFphvDwzMDxE7+ZZUCdb4SpXQkrzCGn/JK5rTidjiM51IbTJ+cNgLp9XobPQsbtWUO7GrLyPPNpWC0VPuPPB9xSG77Bx0LnxUizt995D27CYtVX62nJ+8nE+1IkOkQVaVO4nC8uL4uF1qP0W+3D7eSxTmLeUZcuq20FuOw3TffjfmvHupVyUcMUp/7jcR6Agr4aT3LKA4KUAD7ylAv1g4b/NhR6lyeeJUyjW/YBcsgn8hcfEPaRJYt/vVIfHY5crh6+T5O7m39ssZz+JL9JxgrIsSBEEQBEEQBEEQBEEQBEEQBEEQBEEQBPE/8BuvqzpqvCJLSgAAAABJRU5ErkJggg=="></ion-icon> -->
+
+    <!-- iocn section end******************************************************************************************************************** -->
+
+    <!-- Post sections start************************************************************************************************************ -->
+    <ion-row *ngIf="filterPostWithId">
+      <ion-col size="4" *ngFor="let posts of filterPostWithId">
+        <img
+          src="http://localhost:9000/img/{{posts.image}}"
+          alt=""
+          (click)="showSinglePosts(posts._id)"
+        />
+      </ion-col>
+    </ion-row>
+
+    <!-- Post sections end************************************************************************************************************ -->
+  </ion-grid>
+</ion-content>

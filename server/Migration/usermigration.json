@@ -5,6 +5,9 @@
     "name": {
       "type": "String"
     },
+    "username": {
+      "type": "String"
+    },
     "email": {
       "type": "String"
     },
@@ -19,5 +22,11 @@
     },
     "meta":{
       "type":"Number"
-    }
+    },
+    "gender":{
+    "type":"String"
+  },
+    "bio":{
+    "type":"String"
   }
+}

@@ -1,0 +1,10 @@
+ion-col {
+    cursor: pointer;
+    color: #333; 
+  }
+  
+  ion-col.selected {
+    border-bottom: 2px solid rgb(247, 247, 247);
+    color: rgb(243, 243, 243); 
+  }
+  

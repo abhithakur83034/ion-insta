@@ -24,5 +24,13 @@ getRegiseredUser(){
 }
 
 
+//Edit profile***********************************************************************************************************************]
+
+
+editProfile(data:any,id:any){
+  return this.http.put(`http://localhost:9000/api/userupdate/${id}`,data)
+}
+
+
 
 }

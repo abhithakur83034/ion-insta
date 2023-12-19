@@ -7,6 +7,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+<ion-grid>
+  <ion-row>
+    <ion-col *ngIf="getLoginUser">
+      <img src="http://localhost:9000/img/{{getLoginUser.image}}" alt="" height="80px" width="80px" style="border-radius: 50%;">
+      <span style="position: absolute; left: 5px; top: 90px; color: #999999;">add story</span>
+    </ion-col>
+  </ion-row>
+  
+  <div *ngIf="filteredUsers" style="margin-top: 20px;">
+    <ion-card *ngFor="let post of posts" class="user-card">
+      <ion-card-content>
+        <ion-col *ngFor="let user of filteredUsers" (click)="showProfile(user._id)">
+          <img src="http://localhost:9000/img/{{user.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;">
+          <span style="font-size: large; position: absolute; bottom: 70%; left: 120%;">{{user.name}}</span>
+        </ion-col>
+  
+       
+          <ion-col>
+            <img src="http://localhost:9000/img/{{post.image}}" alt="" height="400px" width="100%">
+          </ion-col>
+        
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+</ion-grid>
 
 </ion-content>

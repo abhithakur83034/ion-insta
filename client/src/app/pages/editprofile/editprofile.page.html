@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        icon="arrow-back"
+        defaultHref="/"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row *ngIf="filterUser">
+      <form [formGroup]="editProfileForm" (ngSubmit)="editPrifileData()">
+      <ion-col size="12"
+        style="display: flex; justify-content: center; align-items: center"
+      >
+        <img
+          src="http://localhost:9000/img/{{filterUser.image}}"
+          alt=""
+          style="border-radius: 50%; height: 100px; width: 100px"
+          id="open-custom-dialog" expand="block"/>
+          <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+            <ng-template>
+              <div class="wrapper">
+                <ion-list>
+                  <ion-item (click)="AddProfilePicture()">
+                    <ion-icon slot="start" name="image-outline"></ion-icon>
+                    <ion-label>New profile picture</ion-label>
+                    <input type="file" (change)="handleFileInput($event)" #fileInput style="display: none;">
+                  </ion-item>
+                  <ion-item (click)="remove()">
+                    <ion-icon slot="start" name="trash-bin-outline" color="danger"></ion-icon>
+                    <ion-label color="danger">Remove current picture</ion-label>
+                  </ion-item>
+                  
+                </ion-list>
+              </div>
+            </ng-template>
+          </ion-modal>
+      </ion-col>
+      
+          
+            <ion-col size="12">
+              <ion-item class="ion-margin">
+                <ion-label>Name </ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
+              </ion-item>
+            </ion-col>
+          
+      
+            <ion-col size="12">
+              <ion-item class="ion-margin">
+                <ion-label>Username </ion-label>
+                <ion-input type="text" formControlName="username"></ion-input>
+              </ion-item>
+            </ion-col>
+      
+            <ion-col size="12">
+              <ion-item class="ion-margin">
+                <ion-label>Bio </ion-label>
+                <ion-input type="text" formControlName="bio"></ion-input>
+              </ion-item>
+            </ion-col>
+         
+            <ion-col size="12">
+              <ion-item class="ion-margin" >
+                <ion-label>Gender</ion-label>
+                <ion-select formControlName="gender">
+                  <ion-select-option value="male">Male</ion-select-option>
+                  <ion-select-option value="female">Female</ion-select-option>
+                  <ion-select-option value="other">Other</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+      
+       <ion-button  class="ion-margin" expand="block" type="submit" >Save</ion-button>
+      
+      </form>
+      
+    </ion-row>
+  </ion-grid>
+</ion-content>
