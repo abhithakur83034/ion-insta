@@ -57,6 +57,10 @@ const routes: Routes = [
   {
     path: 'showsingleprofile/:id',
     loadChildren: () => import('./pages/showsingleprofile/showsingleprofile.module').then( m => m.ShowsingleprofilePageModule)
+  },
+  {
+    path: 'chat',
+    loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
   }
 ];
 @NgModule({

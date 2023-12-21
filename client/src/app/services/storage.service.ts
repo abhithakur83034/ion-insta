@@ -23,7 +23,7 @@ export class StorageService {
     if (!this.platForm.is('cordova')) {
       return new Promise(async (resolve, reject) => {
         const data =  localStorage.getItem(key);
-        console.log(data);
+        // console.log(data);
         resolve(data);
         
       });

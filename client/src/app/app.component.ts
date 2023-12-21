@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
       .getFromlocal('user')
       .then((res: any) => {
         this.user = JSON.parse(res);
-        console.log(this.user);
+        // console.log(this.user);
 
         if (this.user) {
           this.router.navigate(['']);

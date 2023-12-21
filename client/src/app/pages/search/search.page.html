@@ -1,13 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back" defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
     <ion-title>search</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">search</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <form>
+          <ion-input type="search" placeholder="Search..." class="ion-margin" (input)="searchEvent($event)" >
+            <ion-icon slot="start" name="search-outline"></ion-icon>
+          </ion-input>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="searchedUser">
+      <ion-col size="12" *ngFor="let user of searchedUser">
+           <div style="display: flex;"  (click)="showUserDetils(user._id)">
+               <img src="http://localhost:9000/img/{{user.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;">
+               <p  style="margin-left: 20px; font-size: large; color: white; margin-top: 10px;">
+                {{user.name}}
+               </p>
+           </div>
+      </ion-col>
+    </ion-row>
+<div *ngIf="!searchedUser" >
+      <ion-row >
+        <ion-col size="4" *ngFor="let post of Posts">
+          <img src="http://localhost:9000/img/{{post.image}}" height="205px" width="200px" alt="">
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+ 
+  
+  
 </ion-content>

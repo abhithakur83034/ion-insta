@@ -16,6 +16,7 @@ export class ShowpostsPage implements OnInit {
   singleUser: any;
   filterSinglePost:any;
   show: boolean[] = [];
+  filterUser:any=[]
 
   constructor(
     private route: ActivatedRoute,
@@ -28,30 +29,24 @@ export class ShowpostsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.storage
-      .getFromlocal('user')
-      .then((res: any) => {
-        this.user = JSON.parse(res);
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
+this.getPost();
+  }
 
-    this.userService.getRegiseredUser().subscribe((res: any) => {
-      console.log(res.reg);
-      let filterUser = res.reg.filter(
-        (item: any) => item._id === this.user._id
-      );
-      this.singleUser = filterUser[0];
-    });
-
+  getPost(){
     this.postsService.getPosts().subscribe((res: any) => {
       console.log(res.allPost);
       this.filterSinglePost = res.allPost.filter(
         (item: any) => item._id === this.productId
       );
       console.log(this.filterSinglePost);
-      // this.singlePost = filterSinglePost[0];
+      this.singlePost = this.filterSinglePost[0];
+      console.log(this.singlePost);
+      // find user according to post******************************************************************
+     this.userService.getRegiseredUser().subscribe((res:any)=>{
+       console.log(res.reg);
+       this.filterUser = res.reg.filter((item:any)=>item._id === this.singlePost.userId)
+       this.singleUser = this.filterUser[0]        
+     })
     });
   }
 
@@ -60,8 +55,8 @@ export class ShowpostsPage implements OnInit {
   }
 
 
-  gotoProfile(){
-    this.router.navigate(['/tabs/tab3'])
+  gotoProfile(id:any){
+    this.router.navigate(['/showsingleprofile',id])
   }
 
   togglelike(data:any, index:any){

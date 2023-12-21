@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-icon slot="end" aria-hidden="true" name="search-sharp" style="font-size: 30px; margin-right: 10px; " routerLink="/search" ></ion-icon>
+    <!-- <ion-title slot="start" >
       Home
-    </ion-title>
+    </ion-title> -->
   </ion-toolbar>
 </ion-header>
 
@@ -16,22 +17,35 @@
   </ion-row>
   
   <div *ngIf="filteredUsers" style="margin-top: 20px;">
-    <ion-card *ngFor="let post of posts" class="user-card">
+    <ion-card *ngFor="let post of posts  let i = index" class="user-card">
       <ion-card-content>
-        <ion-col *ngFor="let user of filteredUsers" (click)="showProfile(user._id)">
-          <img src="http://localhost:9000/img/{{user.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;">
-          <span style="font-size: large; position: absolute; bottom: 70%; left: 120%;">{{user.name}}</span>
+        <ion-col  *ngIf="userExistsInFilteredUsers(post.userId)"(click)="showProfile(post.userId)">
+          <img src="http://localhost:9000/img/{{globalUserId.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;">
+          <span style="font-size: large; position: absolute; bottom: 70%; left: 120%;">{{globalUserId.name}}</span>
         </ion-col>
   
        
           <ion-col>
             <img src="http://localhost:9000/img/{{post.image}}" alt="" height="400px" width="100%">
           </ion-col>
-        
+        <ion-col>
+          <ion-icon
+                     name="heart"
+                     size="large"
+                     [color]="show[i] ? 'danger' : ''"
+                     (click)="togglelike(post, i)"
+          ></ion-icon>
+        </ion-col>
       </ion-card-content>
     </ion-card>
+
+   
   </div>
   
 </ion-grid>
+  <!-- Floating Action Button (Message Icon) -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-icon name="chatbubble-ellipses-sharp"(click)="openChat()" style="font-size: 30px;"></ion-icon>
+  </ion-fab>
 
 </ion-content>

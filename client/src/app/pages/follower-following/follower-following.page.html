@@ -10,11 +10,49 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col (click)="selectedTab = 'followers'" [class.selected]="selectedTab === 'followers'"  >
-        <ion-label style="display: flex; justify-content: center;"><span>0</span> &nbsp; Followers</ion-label>
+      <ion-segment>
+        <ion-segment-button value="Follower"  (click)="toggler('follower')" >
+          <ion-label> <span>{{getFollowerss.length}}</span> Follower</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Following"  (click)="toggler('following')">
+          <ion-label><span> {{followingUser.length}}</span> Following</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      <!-- <ion-col (click)="selectedTab = 'followers'" [class.selected]="selectedTab === 'followers'"  >
+        <ion-label style="display: flex; justify-content: center;" (click)="toggler('follower')" ><span>{{getFollowerss.length}}</span> &nbsp; Followers</ion-label>
       </ion-col>
       <ion-col (click)="selectedTab = 'following'" [class.selected]="selectedTab === 'following'">
-        <ion-label style="display: flex; justify-content: center;"><span>0</span> &nbsp; Following</ion-label>
+        <ion-label style="display: flex; justify-content: center;" (click)="toggler('following')" ><span>{{followingUser.length}}</span> &nbsp; Following</ion-label>
+      </ion-col> -->
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="follower">
+        <div *ngFor="let user of getFollowerss" style="display: flex; margin-top: 10px;" (click)="showUserDetils(user._id)" >
+          <span>
+            <img src="http://localhost:9000/img/{{user.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;" >
+          </span>
+          <p style="margin-left: 20px; font-size: large; color: white; margin-top: 10px;" >
+            {{user.name}}
+          </p>
+          <div style="margin-left:auto;" >
+            <ion-button size="small" expand="block" (click)="followUnfollow(user)" >Follow</ion-button>
+            <ion-button size="small" fill="outline" expand="block" color="dark" (click)="followUnfollow(user)" >Following</ion-button>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col *ngIf="following">
+        <div *ngFor="let user of followingUser" style="display: flex; margin-top: 10px;" (click)="showUserDetils(user._id)" >
+          <span>
+            <img src="http://localhost:9000/img/{{user.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;" >
+          </span>
+          <p style="margin-left: 20px; font-size: large; color: white; margin-top: 10px;" >
+            {{user.name}}
+          </p>
+          <div style="margin-left:auto;" >
+            <ion-button size="small" expand="block" (click)="followUnfollow(user)" >Follow</ion-button>
+            <ion-button size="small" fill="outline" expand="block" color="dark" (click)="followUnfollow(user)" >Following</ion-button>
+          </div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

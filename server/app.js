@@ -4,6 +4,7 @@ const app = express();
 
 const userRoute = require('./Route/userRoute');
 const postsRoute = require('./Route/postRoute');
+const followFollowing = require('./Route/followfollowingRoute')
 
 
 app.use(cors());
@@ -13,6 +14,7 @@ app.use("/img", express.static("./uploads"));
 
 app.use('/api',userRoute);
 app.use('/api',postsRoute);
+app.use('/api',followFollowing)
 
 
 

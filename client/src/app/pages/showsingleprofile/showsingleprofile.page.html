@@ -24,15 +24,15 @@
             />
           </ion-col>
           <ion-col size="3" style="text-align: center">
-            <p>4</p>
+            <p>{{filterPostWithId.length}}</p>
             <ion-text>Posts</ion-text>
           </ion-col>
           <ion-col size="3" style="text-align: center" (click)="followers()">
-            <p>4</p>
+            <p>{{findFollowerUser.length}}</p>
             <ion-text>Followers</ion-text>
           </ion-col>
           <ion-col size="3" style="text-align: center" (click)="followings()">
-            <p>4</p>
+            <p>{{allfollowingUser.length}}</p>
             <ion-text>Following</ion-text>
           </ion-col>
         </ion-row>
@@ -66,6 +66,7 @@
           src="http://localhost:9000/img/{{posts.image}}"
           alt=""
           (click)="showSinglePosts(posts._id)"
+          height="150px"
         />
       </ion-col>
     </ion-row>

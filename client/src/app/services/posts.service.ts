@@ -23,8 +23,8 @@ export class PostsService {
 
   //like post*************************************************************************************************************
 
-  likePost(data:any,id:any){
-    return this.http.post(`http://localhost:9000/api/uploadfiles/${id}`,data)
+  likePost(data:any){
+    return this.http.post(`http://localhost:9000/api/like-posts`,data)
   }
 
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FollowfollowingService } from 'src/app/services/followfollowing.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,42 +11,100 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FollowerFollowingPage implements OnInit {
   user: any;
-  filterUser:any;
-  getSingleUser:any;selectedTab: string = '';
+  filterUser: any;
+  getSingleUser: any;
+  selectedTab: string = '';
+  allregUser: any = [];
+follower:any;
+following:any;
+userIds:any;
 
-  constructor(private storage: StorageService, private userService:UserService) { }
-
+  constructor(
+    private route: ActivatedRoute,
+    private storage: StorageService,
+    private userService: UserService,
+    private followFollowing: FollowfollowingService,
+    private router:Router
+  ) {}
 
   ionViewWillEnter() {
-    console.log("clickrd on ionView");
+    console.log('clickrd on ionView');
+    this.user = this.route.snapshot.paramMap.get('id')
+    console.log(this.user);
     
-    this.storage
-      .getFromlocal('user')
-      .then((res: any) => {
-        this.user = JSON.parse(res);
-        console.log(this.user);
-        
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
+   
+    this.getFollowing();
+    this.getFollowers();
   }
 
   ngOnInit() {
-    console.log("Clicked ");
-    this.getRegisteredUser()
+    console.log('Clicked ');
+    this.getRegisteredUser();
   }
 
-
-  getRegisteredUser(){
-    this.userService.getRegiseredUser().subscribe((res:any)=>{
+  getRegisteredUser() {
+    this.userService.getRegiseredUser().subscribe((res: any) => {
       console.log(res.reg);
-      this.getSingleUser = res.reg.filter((item:any)=> item._id === this.user._id)
-      console.log(this.getSingleUser);
-      this.filterUser = this.getSingleUser[0]
-      console.log(this.filterUser);
-      
+      this.allregUser = res.reg;
+      this.getSingleUser = this.allregUser.filter(
+        (item: any) => item._id === this.user
+      );
+      // console.log(this.getSingleUser);
+      this.filterUser = this.getSingleUser[0];
+      // console.log(this.filterUser);
+    });
+  }
+
+  followingUser: any = [];
+  getFollowing() {
+    this.followFollowing.getfollowing().subscribe((res: any) => {
+      // console.log(res);
+      let filterUser = res.filter((item: any) => item.userId === this.user);
+      // console.log(filterUser);
+
+      let findUser = filterUser.map((item: any) => item.following);
+      console.log(findUser);
+      if (this.allregUser) {
+        this.followingUser = this.allregUser.filter((item: any) => findUser.includes(item._id));
+          console.log(this.followingUser);
+      }
+    });
+  }
+
+  findFollowerUser:any=[];
+  Followers:any=[];
+  getFollowerss:any=[];
+  
+  getFollowers(){
+    this.followFollowing.getfollowing().subscribe((res:any)=>{
+      console.log(res); 
+      this.findFollowerUser = res.filter((item:any)=> item.following === this.user)
+      console.log(this.findFollowerUser);   
+      this.Followers = this.findFollowerUser.map((item:any)=> item.userId)
+      console.log(this.Followers);
+     
+       this.getFollowerss = this.allregUser.filter((item:any)=> this.Followers.includes(item._id))
+       console.log(this.getFollowerss);
+       
     })
   }
+
+  toggler(section: string): void {
+    this.follower = section === 'follower';
+    this.following = section === 'following';
+  }
+
+
+  showUserDetils(id:any){
+    this.router.navigate(['/showsingleprofile',id])
+  }
+
+
+
+  followUnfollow(data:any){
+    console.log(data);
+    
+  }
+
 
 }

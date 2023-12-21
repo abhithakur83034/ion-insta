@@ -75,15 +75,15 @@
             <img src="http://localhost:9000/img/{{filterUser.image}}" alt="" style="border-radius: 60%; height: 100px; width: 100px;">
           </ion-col>
           <ion-col size="3" style="text-align: center;">
-            <p>4</p>
+            <p>{{filterPostWithId.length}}</p>
             <ion-text>Posts</ion-text>
           </ion-col>
           <ion-col size="3" style="text-align: center;" (click)="followers()">
-            <p>4</p>
+            <p>{{findFollowerUser.length}}</p>
             <ion-text>Followers</ion-text>
           </ion-col>
           <ion-col size="3" style="text-align: center;"   (click)="followings()" >
-            <p>4</p>
+            <p>{{following.length}}</p>
             <ion-text>Following</ion-text>
           </ion-col>
         </ion-row>
@@ -99,11 +99,12 @@
       </ion-col>
       <div *ngIf="show" style="overflow-x: auto;">
         <div *ngIf="allregisteredUser" style="display: flex;">
-          <div *ngFor="let user of allregisteredUser" class="card-container">
-            <ion-card>
+          <div *ngFor="let user of allregisteredUser" >
+            <ion-card class="card-container">
               <img alt="Silhouette of mountains" src="http://localhost:9000/img/{{user.image}}" height="100px" width="100%" (click)="showProfile(user._id)" />
               <p style="text-align: center;">{{user.name}}</p>
-              <ion-button size="small" expand="block">Follow</ion-button>
+              <ion-button size="small" expand="block" (click)="followUnfollow(user)" >Follow</ion-button>
+              <!-- <ion-button size="small" expand="block"  color="dark" (click)="followUnfollow(user)" >Following</ion-button> -->
             </ion-card>
           </div>
         </div>
@@ -130,7 +131,7 @@
     <!-- Post sections start************************************************************************************************************ -->
     <ion-row *ngIf="filterPostWithId" >
       <ion-col size="4" *ngFor="let posts of filterPostWithId">
-        <img src="http://localhost:9000/img/{{posts.image}}" alt="" (click)="showSinglePosts(posts._id)" >
+        <img src="http://localhost:9000/img/{{posts.image}}"  alt="" (click)="showSinglePosts(posts._id)" height="150px" >
       </ion-col>
     </ion-row>
 
