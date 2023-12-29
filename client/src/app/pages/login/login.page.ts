@@ -67,11 +67,12 @@ export class LoginPage implements OnInit {
     console.log(this.loginForm.value);
     this.userService.login(this.loginForm.value).subscribe({
       next: (res: any) => {
-        console.log(res.user);
+        console.log(res);
         if (res.status === 'success') {
           // alert('user Login')
           this.loader.showToast('Login successfully');
           this.storage.saveToLocal('user', res.user);
+          this.storage.saveToLocal('token', res.token);
           if (this.rememberMe === true) {
             this.storage.saveToLocal('rememberUser', this.loginForm.value);
           }

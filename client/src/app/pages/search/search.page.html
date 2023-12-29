@@ -32,7 +32,7 @@
 <div *ngIf="!searchedUser" >
       <ion-row >
         <ion-col size="4" *ngFor="let post of Posts">
-          <img src="http://localhost:9000/img/{{post.image}}" height="205px" width="200px" alt="">
+          <img src="http://localhost:9000/img/{{post.file}}" height="205px" width="200px" alt="" (click)="showPost(post._id)" >
         </ion-col>
       </ion-row>
     </div>

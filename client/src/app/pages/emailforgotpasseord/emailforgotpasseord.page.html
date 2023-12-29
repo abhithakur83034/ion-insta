@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back" defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Verify Youe Email</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="forgotPassword"  (ngSubmit)="forgotPasswordMail()" >
+    <p>
+      <ion-label>Email</ion-label>
+      <ion-input placeholder="Enter Your email." class="form-control" formControlName="email" type="email" ></ion-input>
+    </p>
+    <p>
+      <ion-button type="submit" [disabled]="!forgotPassword.valid" >send otp</ion-button>
+    </p>
+   </form>
+</ion-content>

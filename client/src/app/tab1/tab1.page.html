@@ -1,51 +1,100 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-icon slot="end" aria-hidden="true" name="search-sharp" style="font-size: 30px; margin-right: 10px; " routerLink="/search" ></ion-icon>
-    <!-- <ion-title slot="start" >
-      Home
-    </ion-title> -->
+      <span style="font-size: x-large;" >Instagram</span>
+    <ion-icon
+      slot="end"
+      aria-hidden="true"
+      name="search-sharp"
+      style="font-size: 30px; margin-right: 10px"
+      routerLink="/search"
+    ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-grid>
-  <ion-row>
-    <ion-col *ngIf="getLoginUser">
-      <img src="http://localhost:9000/img/{{getLoginUser.image}}" alt="" height="80px" width="80px" style="border-radius: 50%;">
-      <span style="position: absolute; left: 5px; top: 90px; color: #999999;">add story</span>
-    </ion-col>
-  </ion-row>
-  
-  <div *ngIf="filteredUsers" style="margin-top: 20px;">
-    <ion-card *ngFor="let post of posts  let i = index" class="user-card">
-      <ion-card-content>
-        <ion-col  *ngIf="userExistsInFilteredUsers(post.userId)"(click)="showProfile(post.userId)">
-          <img src="http://localhost:9000/img/{{globalUserId.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;">
-          <span style="font-size: large; position: absolute; bottom: 70%; left: 120%;">{{globalUserId.name}}</span>
-        </ion-col>
-  
-       
-          <ion-col>
-            <img src="http://localhost:9000/img/{{post.image}}" alt="" height="400px" width="100%">
-          </ion-col>
-        <ion-col>
-          <ion-icon
-                     name="heart"
-                     size="large"
-                     [color]="show[i] ? 'danger' : ''"
-                     (click)="togglelike(post, i)"
-          ></ion-icon>
-        </ion-col>
-      </ion-card-content>
-    </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="getLoginUser">
+        <img
+          src="http://localhost:9000/img/{{getLoginUser.image}}"
+          alt=""
+          height="80px"
+          width="80px"
+          style="border-radius: 50%"
+        />
+        <span style="position: absolute; left: 5px; top: 90px; color: #999999"
+          >add story</span
+        >
+      </ion-col>
+    </ion-row>
 
-   
-  </div>
-  
-</ion-grid>
+    <div *ngIf="filteredUsers" style="margin-top: 20px">
+      <ion-card *ngFor="let post of posts  let i = index" class="user-card">
+        <ion-card-content>
+          <ion-col
+            *ngIf="userExistsInFilteredUsers(post.userId)"
+            (click)="showProfile(post.userId)"
+          >
+            <img
+              src="http://localhost:9000/img/{{globalUserId.image}}"
+              alt=""
+              height="50px"
+              width="50px"
+              style="border-radius: 50%"
+            />
+            <span
+              style="
+                font-size: large;
+                position: absolute;
+                bottom: 70%;
+                left: 120%;
+              "
+              >{{globalUserId.name}}</span
+            >
+          </ion-col>
+
+          <ion-col>
+            <img
+              src="http://localhost:9000/img/{{post.file}}"
+              alt=""
+              height="400px"
+              width="100%"
+            />
+          </ion-col>
+          <ion-col>
+            <ion-icon
+              name="heart"
+              size="large"
+              [color]="show[i] ? 'danger' : ''"
+              (click)="togglelike(post, i)"
+            >
+            </ion-icon>
+            <ion-icon
+              name="chatbox"
+              size="large"
+              style="margin-left: 5px"
+              *ngIf="!showcomments"
+              (click)="toggleComments('showcomments')"
+            ></ion-icon>
+            <ion-icon
+              name="chatbox"
+              size="large"
+              style="margin-left: 5px"
+              *ngIf="showcomments"
+              (click)="toggleComments('hidecomments')"
+            ></ion-icon>
+            <div *ngIf="showcomments">hlooooooo</div>
+          </ion-col>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-grid>
   <!-- Floating Action Button (Message Icon) -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-icon name="chatbubble-ellipses-sharp"(click)="openChat()" style="font-size: 30px;"></ion-icon>
+    <ion-icon
+      name="chatbubble-ellipses-sharp"
+      (click)="openChat()"
+      style="font-size: 30px"
+    ></ion-icon>
   </ion-fab>
-
 </ion-content>

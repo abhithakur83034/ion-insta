@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>enterotp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ <form [formGroup]="otpForm" (ngSubmit)="otpData()" >
+  <p>
+    <ion-input formControlName="otp" class="form-control" placeholder="Enter otp" ></ion-input>
+  </p>
+  <p>
+    <ion-button type="submit" [disabled]="!otpForm.valid" >Submit</ion-button>
+  </p>
+ </form>
+</ion-content>

@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     this.storage
       .getFromlocal('user')
       .then((res: any) => {
-        this.user = JSON.parse(res);
+        this.user = JSON.parse(res.data);
         // console.log(this.user);
 
         if (this.user) {

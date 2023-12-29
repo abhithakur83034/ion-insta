@@ -80,6 +80,7 @@ export class EditprofilePage implements OnInit {
   }
 
   editPrifileData() {
+    
     console.log(this.editProfileForm.value);
     let formData = new FormData();
     formData.append('image', this.fileInp);

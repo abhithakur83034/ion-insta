@@ -5,11 +5,11 @@ const path = require("path");
 const nodemailer = require("nodemailer");
 const secret_key = "mailSecret";
 var randomstring = require("randomstring");
-const otpLength = 4;
+// const otpLength = 4;
 
 const regUser = async (req, res) => {
   //console.log(req.body);
-  // //console.log(req.file);
+  //console.log(req.file);
   const checkmail = await userModel.findOne({ email: req.body.email, name:req.body.name });
   if (!checkmail) {
     try {

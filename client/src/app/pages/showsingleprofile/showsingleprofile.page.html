@@ -38,7 +38,8 @@
         </ion-row>
       </ion-col>
       <ion-col size="12">
-        <p>{{filterUser.name}}</p>
+        <p>{{filterUser.username}}</p>
+        <p>{{filterUser.bio}}</p>
       </ion-col>
       <ion-col size="12" style="display: flex; justify-content: space-between">
         <ion-button size="small" >Follow</ion-button>
@@ -63,7 +64,7 @@
     <ion-row *ngIf="filterPostWithId">
       <ion-col size="4" *ngFor="let posts of filterPostWithId">
         <img
-          src="http://localhost:9000/img/{{posts.image}}"
+          src="http://localhost:9000/img/{{posts.file}}"
           alt=""
           (click)="showSinglePosts(posts._id)"
           height="150px"

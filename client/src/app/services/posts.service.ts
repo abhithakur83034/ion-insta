@@ -10,14 +10,14 @@ export class PostsService {
 
   //add post ************************************************************************
 
-  addPosts(data:any,id:any){
-    return this.http.post(`http://localhost:9000/api/uploadfiles/${id}`,data)
+  addPosts(data:any,id:any,headers:any){
+    return this.http.post(`http://localhost:9000/api/uploadfiles/${id}`,data,headers)
   }
 
   //get post ************************************************************************
 
-  getPosts(){
-    return this.http.get(`http://localhost:9000/api/get-all-posts`)
+  getPosts(headers: any) {
+    return this.http.get(`http://localhost:9000/api/get-all-posts`, headers);
   }
 
 

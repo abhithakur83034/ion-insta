@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from 'src/app/services/posts.service';
@@ -16,8 +17,8 @@ export class ShowpostsPage implements OnInit {
   singleUser: any;
   filterSinglePost:any;
   show: boolean[] = [];
-  filterUser:any=[]
-
+  filterUser:any=[];
+  token:String =""
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
@@ -29,11 +30,28 @@ export class ShowpostsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-this.getPost();
+    this.storage
+    .getFromlocal('user')
+    .then((res: any) => {
+      // console.log(res);
+      this.user = JSON.parse(res.data);
+      console.log(this.user);
+      this.token = JSON.parse(res.token);
+      console.log(this.token);
+      this.getPost();
+
+    })
+    .catch((error: any) => {
+      console.log(error);
+    });
   }
 
   getPost(){
-    this.postsService.getPosts().subscribe((res: any) => {
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer `  + this.token
+    });
+    this.postsService.getPosts({headers:headers}).subscribe((res: any) => {
+      console.log(res);
       console.log(res.allPost);
       this.filterSinglePost = res.allPost.filter(
         (item: any) => item._id === this.productId

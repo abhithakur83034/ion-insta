@@ -20,18 +20,24 @@ export class StorageService {
 
 
   getFromlocal(key:any): Promise<any> {
+    console.log(key);
+    
     if (!this.platForm.is('cordova')) {
       return new Promise(async (resolve, reject) => {
         const data =  localStorage.getItem(key);
-        // console.log(data);
-        resolve(data);
+        const token =  localStorage.getItem('token');
+        console.log(data);
+        console.log(token);
+        resolve({ data, token });;
         
       });
     } else {
       return this.nativeStorage.getItem(key).then(
-        (data) => data,
+        (data) => {
+          return { user: data.user, token: data.token || null };
+        },
         (error: any) => {
-          return null;
+          return { user: null, token: null };
         }
       );
     }

@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -22,7 +23,8 @@ export class ShowsingleprofilePage implements OnInit {
   allRegUsers:any=[];
   paramsUser:any=[];
   // followFollowing:any=[];
-  following:any=[]
+  following:any=[];
+  token:String =""
 
   constructor(
     private route:ActivatedRoute,
@@ -36,12 +38,24 @@ export class ShowsingleprofilePage implements OnInit {
   ionViewWillEnter() {
  this.user =this.route.snapshot.paramMap.get('id')
    console.log(this.user);
+
+   this.storage
+   .getFromlocal('user')
+   .then((res: any) => {
+     // console.log(res);
+     this.token = JSON.parse(res.token);
+     console.log(this.token);
+     this.getAllPosts();
+   })
+   .catch((error: any) => {
+     console.log(error);
+   });
    
 
    this.allFollowingUser();
    this.getFollowing();
    this.getFollowers()
-    this.getAllPosts();
+    
   }
 
   ngOnInit(): void {
@@ -62,7 +76,10 @@ export class ShowsingleprofilePage implements OnInit {
   filterPostWithId: any = [];
 
   getAllPosts() {
-    this.postService.getPosts().subscribe((res: any) => {
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ` + this.token
+    });
+    this.postService.getPosts({headers:headers}).subscribe((res: any) => {
       console.log(res.allPost);
       this.filterPostWithId = res.allPost.filter((item: any) => item.userId === this.user);
       console.log(this.filterPostWithId);

@@ -6,6 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { PostsService } from '../services/posts.service';
 import { FollowfollowingService } from '../services/followfollowing.service';
 import { LoaderService } from '../services/loader.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab3',
@@ -21,7 +22,9 @@ export class Tab3Page implements OnInit {
   allregisteredUser: any = [];
   following: any = [];
   findFollowerUser: any = [];
-  registerUser:any=[]
+  registerUser:any=[];
+  myAngularxQrCode: string = '';
+token:String='';
 
   constructor(
     private modalCtrl: ModalController,
@@ -31,7 +34,12 @@ export class Tab3Page implements OnInit {
     private postService: PostsService,
     private followFollowing: FollowfollowingService,
     private loader: LoaderService
-  ) {}
+  ) {
+    this.myAngularxQrCode = 'https://ionicframework.com/docs';
+  }
+
+
+  
 
   ionViewWillEnter() {
     console.log('hitteddddddd');
@@ -39,15 +47,21 @@ export class Tab3Page implements OnInit {
     this.storage
       .getFromlocal('user')
       .then((res: any) => {
-        this.user = JSON.parse(res);
+        this.user = JSON.parse(res.data);
         console.log(this.user);
+        this.token =  JSON.parse(res.token);
+        console.log(this.token);
         if (this.user) {
+          this.myAngularxQrCode = this.generateQrCodeLink(this.user);
           this.getUser();
         }
       })
       .catch((error: any) => {
         console.log(error);
       });
+  }
+  generateQrCodeLink(user: any): string {
+    return `https://localhost:9000/${user.name}`;
   }
 
   ngOnInit(): void {
@@ -97,7 +111,7 @@ export class Tab3Page implements OnInit {
     // Placeholder logic for Settings
     // console.log('Navigating to Settings');
     this.modalCtrl.dismiss();
-    this.router.navigate(['/settings', this.user._id]);
+    this.router.navigate(['/settingss', this.user._id]);
   }
 
   navigateToSaved() {
@@ -110,7 +124,7 @@ export class Tab3Page implements OnInit {
   navigateToQRCode() {
     // Placeholder logic for Notifications
     this.modalCtrl.dismiss();
-    // console.log('Navigating to Notifications');
+
   }
 
   navigateToSupervision() {
@@ -225,12 +239,15 @@ export class Tab3Page implements OnInit {
   filterPostWithId: any = [];
 
   getAllPosts() {
-    this.postService.getPosts().subscribe((res: any) => {
-      // console.log(res.allPost);
+    let headers = new HttpHeaders({
+      'Authorization': `Bearer ` + this.token
+    });
+    this.postService.getPosts({headers:headers}).subscribe((res: any) => {
+      console.log(res.allPost);
       this.filterPostWithId = res.allPost.filter(
         (item: any) => item.userId === this.user._id
       );
-      // console.log(this.filterPostWithId);
+      console.log(this.filterPostWithId);
     });
   }
 
@@ -244,6 +261,7 @@ export class Tab3Page implements OnInit {
 
   logOut() {
     this.storage.removeFromLocal('user');
+    this.storage.removeFromLocal('token');
     this.modalCtrl.dismiss();
     this.router.navigate(['/login']);
   }

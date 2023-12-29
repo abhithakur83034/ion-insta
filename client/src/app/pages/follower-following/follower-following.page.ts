@@ -18,6 +18,7 @@ export class FollowerFollowingPage implements OnInit {
 follower:any;
 following:any;
 userIds:any;
+follow:any
 
   constructor(
     private route: ActivatedRoute,
@@ -51,7 +52,7 @@ userIds:any;
       );
       // console.log(this.getSingleUser);
       this.filterUser = this.getSingleUser[0];
-      // console.log(this.filterUser);
+      console.log(this.filterUser);
     });
   }
 
@@ -59,10 +60,10 @@ userIds:any;
   getFollowing() {
     this.followFollowing.getfollowing().subscribe((res: any) => {
       // console.log(res);
-      let filterUser = res.filter((item: any) => item.userId === this.user);
-      // console.log(filterUser);
+      let filterUsers = res.filter((item: any) => item.userId === this.user);
+      console.log(filterUsers);
 
-      let findUser = filterUser.map((item: any) => item.following);
+      let findUser = filterUsers.map((item: any) => item.following);
       console.log(findUser);
       if (this.allregUser) {
         this.followingUser = this.allregUser.filter((item: any) => findUser.includes(item._id));
@@ -101,8 +102,8 @@ userIds:any;
 
 
 
-  followUnfollow(data:any){
-    console.log(data);
+  followUnfollow(section:'follow'|'unfollow'){
+    this.follow = section === 'follow'
     
   }
 

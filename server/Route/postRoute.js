@@ -1,7 +1,7 @@
 const express = require("express");
 const postsController = require("../Controller/postController");
 const multer = require("multer");
-
+const middleware = require('../middleware/middleware')
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -17,7 +17,9 @@ const fileFilter = function (req, file, cb) {
   if (
     file.mimetype === "image/jpg" ||
     file.mimetype === "image/jpeg" ||
-    file.mimetype === "image/png"
+    file.mimetype === "image/png" ||
+    file.mimetype === 'video/mp3'||   
+    file.mimetype === 'video/mp4' 
   ) {
     cb(null, true);
   } else {
@@ -33,9 +35,9 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
-router.post("/uploadfiles/:id",upload.single("image"),postsController.addPost);
-router.get('/get-all-posts',postsController.showPosts);
-router.post('/like-posts',postsController.like);
+router.post("/uploadfiles/:id",middleware.verifyToken,upload.single("image"),postsController.addPost);
+router.get('/get-all-posts',middleware.verifyToken,postsController.showPosts);
+router.post('/like-posts',middleware.verifyToken,postsController.like);
 
 
 module.exports = router;

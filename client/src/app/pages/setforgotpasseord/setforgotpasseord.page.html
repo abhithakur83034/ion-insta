@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>setforgotpassword</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ <form [formGroup]="setPassword" (ngSubmit)="passwordData()" >
+  <p>
+    <ion-input type="password" class="form-control" placeholder="Set New Password" formControlName="password"  ></ion-input>
+  </p>
+  <p>
+    <ion-button type="submit" [disabled]="!setPassword.valid" >set password</ion-button>
+  </p>
+ </form>
+</ion-content>

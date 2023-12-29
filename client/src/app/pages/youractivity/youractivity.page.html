@@ -1,16 +1,118 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-        icon="arrow-back"
-        defaultHref="/"
-        text=""
-      ></ion-back-button>
+      <ion-back-button icon="arrow-back" defaultHref="/" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>Your Activity</ion-title>
+    <ion-title class="ion-text-center">Your Activity</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
+  <p style="text-align: center; font-size: 26px;">One place to manage your activity</p>
+  <p  style="color: grey; font-size: smaller; text-align: center;">View and manage your interactions, content, and account activity. Learn more </p>
 
+  
+  <ul>
+    <p style="color: grey; font-size: smaller;">Interactions</p>
+    <li class="text">
+      <ion-icon name="heart" class="icon"></ion-icon>
+      <span>Likes</span>
+    </li>
+    <li class="text">
+      <ion-icon name="chatbox" class="icon"></ion-icon>
+      <span>Comments</span>
+    </li>
+    <li class="text">
+      <ion-icon name="pricetag" class="icon"></ion-icon>
+      <span>Tags</span>
+    </li>
+    <li class="text">
+      <ion-icon name="happy" class="icon"></ion-icon>
+      <span>Sticker responses</span>
+    </li>
+    <li class="text">
+      <ion-icon name="star" class="icon"></ion-icon>
+      <span>Reviews</span>
+    </li>
+  </ul>
+  
+
+
+
+  <ul>
+    <p style="color: grey; font-size: smaller;">Removed and archived content</p>
+    <li class="text">
+      <ion-icon name="trash-bin" class="icon"></ion-icon>
+      <span>Recently deleted</span>
+    </li>
+    <li class="text">
+      <ion-icon name="archive" class="icon"></ion-icon>
+      <span>Archived</span>
+    </li>
+  </ul>
+  
+
+  <ul>
+    <p style="color: grey; font-size: smaller;">Content you shared</p>
+    <li class="text">
+      <ion-icon name="images" class="icon"></ion-icon>
+      <span>Posts</span>
+    </li>
+    <li class="text">
+      <ion-icon name="film" class="icon"></ion-icon>
+      <span>Reels</span>
+    </li>
+    <li class="text">
+      <ion-icon name="bookmark" class="icon"></ion-icon>
+      <span>Highlights</span>
+    </li>
+  </ul>
+  
+  <ul>
+    <p style="color: grey; font-size: smaller;">Suggested content</p>
+    <li class="text">
+      <ion-icon name="close-circle" class="icon"></ion-icon>
+      <span>Not interested</span>
+    </li>
+    <li class="text">
+      <ion-icon name="checkmark-circle" class="icon"></ion-icon>
+      <span>Interested</span>
+    </li>
+  </ul>
+  
+  
+  <ul>
+    <p style="color: grey; font-size: smaller;">How you use Instagram</p>
+    <li class="text">
+      <ion-icon name="timer" class="icon"></ion-icon>
+      <span>Time spent</span>
+    </li>
+    <li class="text">
+      <ion-icon name="document" class="icon"></ion-icon>
+      <span>Account history</span>
+    </li>
+    <li class="text">
+      <ion-icon name="search" class="icon"></ion-icon>
+      <span>Recent searches</span>
+    </li>
+    <li class="text">
+      <ion-icon name="link" class="icon"></ion-icon>
+      <span>Link history</span>
+    </li>
+  </ul>
+  
+
+  <ul>
+    <p style="color: grey; font-size: smaller;">Information you shared with Instagram</p>
+    <li class="text">
+      <ion-icon name="swap-horizontal" class="icon"></ion-icon>
+      <span>Transfer your information</span>
+    </li>
+    <li class="text">
+      <ion-icon name="cloud-download" class="icon"></ion-icon>
+      <span>Download your information</span>
+    </li>
+  </ul>
+  
+  
 </ion-content>

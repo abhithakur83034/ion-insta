@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from '../services/posts.service';
 import { LoaderService } from '../services/loader.service';
 import { register } from 'swiper/element/bundle';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab2',
@@ -21,6 +22,7 @@ export class Tab2Page implements OnInit {
   img1: any;
   selectedFile: any;
   imageSources: string[] = [];
+  token:String =""
 
   constructor(
     private storage: StorageService,
@@ -39,7 +41,13 @@ export class Tab2Page implements OnInit {
     this.storage
       .getFromlocal('user')
       .then((res: any) => {
-        this.user = JSON.parse(res);
+        console.log(res);
+        this.user = JSON.parse(res.data);
+        console.log(this.user);
+        this.token =JSON.parse(res.token);
+        console.log(this.token);
+        
+        
       })
       .catch((error: any) => {
         console.log(error);
@@ -115,20 +123,22 @@ export class Tab2Page implements OnInit {
       });
     }
   }
-  
 
+
+ 
+ 
+  
+  
   captionData() {
-    // console.log(this.captionForm.value);
+   let headers = new HttpHeaders({
+      'Authorization': `Bearer ` + this.token
+    });
     let formData = new FormData();
-    console.log(this.selectedFile);
     formData.append('image', this.selectedFile);
     formData.append('caption', this.captionForm.value.caption);
-    // formData.append('name', this.filterUser.name);
-    // formData.append('userImage', this.filterUser.image);
-
-    this.postService.addPosts(formData, this.filterUser._id).subscribe({
+  
+    this.postService.addPosts(formData, this.filterUser._id,{headers:headers}).subscribe({
       next: (result: any) => {
-        // console.log(result);
         if (result.status === 'success') {
           this.loader.showToast('Posted');
           this.captionForm.reset();
@@ -139,8 +149,9 @@ export class Tab2Page implements OnInit {
         this.loader.showToast(error.error);
       },
       complete: () => {
-        // console.log('Completed');
+        // Additional completion logic if needed
       },
     });
   }
+  
 }

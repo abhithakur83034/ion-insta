@@ -35,10 +35,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/editprofile/editprofile.module').then( m => m.EditprofilePageModule)
   },
   {
-    path: 'settings/:id',
-    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
-  },
-  {
     path: 'youractivity/:id',
     loadChildren: () => import('./pages/youractivity/youractivity.module').then( m => m.YouractivityPageModule)
   },
@@ -61,6 +57,26 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () => import('./pages/chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'settingss/:id',
+    loadChildren: () => import('./pages/settingss/settingss.module').then( m => m.SettingssPageModule)
+  },
+  {
+    path: 'emailforgotpasseord',
+    loadChildren: () => import('./pages/emailforgotpasseord/emailforgotpasseord.module').then( m => m.EmailforgotpasseordPageModule)
+  },
+  {
+    path: 'enterotp',
+    loadChildren: () => import('./pages/enterotp/enterotp.module').then( m => m.EnterotpPageModule)
+  },
+  {
+    path: 'setforgotpasseord/:id',
+    loadChildren: () => import('./pages/setforgotpasseord/setforgotpasseord.module').then( m => m.SetforgotpasseordPageModule)
+  },
+  {
+    path: 'changepassword',
+    loadChildren: () => import('./pages/changepassword/changepassword.module').then( m => m.ChangepasswordPageModule)
   }
 ];
 @NgModule({
